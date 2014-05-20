@@ -12,14 +12,26 @@ class FlipkartParser extends Parser {
 
   // TODO: Fix the price Extraction
   override def parsePrice(document: Document): Price = {
-    val listPrice = document.select(".old-price").text().toDouble
-    val salePrice = document.select("itemprop[name=price]").attr("content").toDouble
+    val listPrice = document.select(".old-price").text().split(" ")(1).toDouble
+    val sale = document.select(".pprice")
+    val salePrice = sale.text().split(" ")(1).toDouble
     Price(listPrice, salePrice)
   }
 }
 
 class JabongParser extends Parser {
-  override def parseProduct(document: Document, pageUrl: String): Product = ???
 
-  override def parsePrice(document: Document): Price = ???
+  override def parseProduct(document: Document, pageUrl: String): Product = {
+    val title = document.select("span[itemprop=name]").text()
+    val description = document.select("[itemprop=description]").text()
+    Product(title, description, pageUrl)
+  }
+
+  override def parsePrice(document: Document): Price = {
+
+    val salePrice = document.select("span[itemprop=price]").text().toDouble
+    val listPrice = salePrice
+    Price(listPrice, salePrice)
+  }
+
 }

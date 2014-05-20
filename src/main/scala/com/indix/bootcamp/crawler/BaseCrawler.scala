@@ -1,15 +1,15 @@
 package com.indix.bootcamp.crawler
 
-import edu.uci.ics.crawler4j.crawler.{Page, WebCrawler}
+import  edu.uci.ics.crawler4j.crawler.{Page, WebCrawler}
 import edu.uci.ics.crawler4j.parser.HtmlParseData
-import com.indix.bootcamp.parser.{Parser, FlipkartParser}
+import com.indix.bootcamp.parser.{JabongParser, Parser, FlipkartParser}
 import java.io.{PrintWriter, File}
 import scala.util.Random
 import edu.uci.ics.crawler4j.url.WebURL
 
 abstract class BaseCrawler extends WebCrawler {
   val parser: Parser
-  val writer = new PrintWriter(new File("/tmp/crawler4j-scala/results-" + Random.nextInt(Int.MaxValue) + ".csv"))
+  val writer = new PrintWriter(new File("/tmp/crawler4j-jabong/results-" + Random.nextInt(Int.MaxValue) + ".csv"))
 
   /*
     TODO: By default the crawler extracts urls from all the tags like link, script, embed, img, a etc.
@@ -45,4 +45,8 @@ abstract class BaseCrawler extends WebCrawler {
 
 class FlipkartCrawler extends BaseCrawler {
   override val parser: Parser = new FlipkartParser
+}
+
+class JabongCrawler extends BaseCrawler {
+  override val parser: Parser = new JabongParser
 }
