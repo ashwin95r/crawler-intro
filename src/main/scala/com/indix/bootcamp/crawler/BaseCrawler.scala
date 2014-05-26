@@ -6,6 +6,7 @@ import com.indix.bootcamp.parser.{JabongParser, Parser, FlipkartParser}
 import java.io.{PrintWriter, File}
 import scala.util.Random
 import edu.uci.ics.crawler4j.url.WebURL
+import com.indix.bootcamp.models.Price
 
 abstract class BaseCrawler extends WebCrawler {
   val parser: Parser
@@ -32,10 +33,13 @@ abstract class BaseCrawler extends WebCrawler {
     page.getParseData match {
       case data: HtmlParseData =>
         val result = parser.parse(data.getHtml, page.getWebURL.getURL)
+        if(result.isValidProductPage) {
         println(s"Parsed successfully as ${result}")
-        writer.append(result.toCsv)
-        writer.append("\n")
-    }
+
+          writer.append(result.toCsv)
+          writer.append("\n")
+        }
+        }
   }
 
   override def onBeforeExit() {

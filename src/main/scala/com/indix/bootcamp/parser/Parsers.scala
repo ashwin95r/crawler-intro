@@ -32,6 +32,6 @@ class JabongParser extends Parser {
     val salePrice = document.select("span[itemprop=price]").text().toDouble
     val listPrice = salePrice
     Price(listPrice, salePrice)
-  }
+    }
 
 }

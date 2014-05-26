@@ -65,7 +65,7 @@ object CrawlDriver extends App {
   config.setMaxDepthOfCrawling(4)
   config.setMaxPagesToFetch(2000)
   //config.setResumableCrawling(true) // Enable as required
- // config.setProxyHost( "proxy.production.indix.tv")
+  //config.setProxyHost( "proxy.production.indix.tv")
   //config.setProxyPort(8080)
   // TODO: Add proxy support for your crawler to not get blocked.
   /*
@@ -89,7 +89,7 @@ object CrawlDriver extends App {
    * URLs that are fetched and then the crawler starts following links
    * which are found in these pages
    */
-  controller.addSeed("http://www.jabong.com/all-products/?usage=Running&source=sports-leftnav")
+  controller.addSeed("http://www.jabong.com")
 
   /*
    * Start the crawl. This is a blocking operation, meaning that your code
